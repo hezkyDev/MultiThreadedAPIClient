@@ -1,2 +1,28 @@
-# macOS-specific file
+# Ignore macOS-specific files
 .DS_Store
+
+# Ignore build directories
+build/
+cmake-build-debug/
+cmake-build-release/
+
+# Ignore CMake-generated files
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+compile_commands.json
+
+# Ignore executable files and binary output
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.o
+*.obj
+
+# Ignore logs and temporary files
+*.log
+*.tmp
