@@ -1,6 +1,11 @@
 # Ignore macOS-specific files
 .DS_Store
 
+
+# Ignore VSCode settings
+.vscode/
+*.code-workspace
+
 # Ignore build directories
 build/
 cmake-build-debug/
