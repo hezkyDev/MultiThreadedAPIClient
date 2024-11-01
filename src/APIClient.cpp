@@ -5,6 +5,7 @@
 #include <nlohmann/json.hpp>
 #include <sqlite3.h>
 #include <chrono>
+#include <cstdlib>
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s) {
     s->append((char*)contents, size * nmemb);
@@ -69,8 +70,18 @@ std::string APIClient::makeApiRequest(const std::string& url) {
 }
 
 void APIClient::fetchData() {
+    // Retrieve the API key from the environment variable
+    const char* apiKey = getenv("OPENWEATHERMAP_API_KEY");
+    if (!apiKey) {
+        std::cerr << "Error: OPENWEATHERMAP_API_KEY environment variable not set." << std::endl;
+        logToFile("Error: OPENWEATHERMAP_API_KEY environment variable not set.");
+        return;
+    }
+
+    std::string baseUrl = "https://api.openweathermap.org/data/2.5/weather?q=Kuala+Lumpur&appid=";
+    std::string url = baseUrl + apiKey + "&units=metric";
+
     while (isRunning) {
-        std::string url = "https://api.openweathermap.org/data/2.5/weather?q=Kuala+Lumpur&appid=a9c43513578f728eaf03841d46ca8b16&units=metric";
         std::string response = makeApiRequest(url);
 
         try {
